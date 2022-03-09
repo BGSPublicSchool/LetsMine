@@ -11,6 +11,7 @@
     <title>Lets Mine</title>
 </head>
 <body>
+    <div id="preloader"></div>
     <header>
         <a href="index.html" class="header-brand">Lets Mine</a>
         <nav>
@@ -60,5 +61,14 @@
     </div>
     </footer>
     </div>
+    <script>
+
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function () {
+            loader.style.display="none";
+        })
+
+    </script>
 </body>
 </html>
