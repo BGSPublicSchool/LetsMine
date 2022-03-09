@@ -1,4 +1,6 @@
-var form = document.getElementById("contact-form");
+
+
+    var form = document.getElementById("contact-form");
     
     async function handleSubmit(event) {
       event.preventDefault();
@@ -11,8 +13,18 @@ var form = document.getElementById("contact-form");
             'Accept': 'application/json'
         }
       }).then(response => {
-        status.innerHTML = "Thanks for your submission!";
-        form.reset()
+        if (response.ok) {
+          status.innerHTML = "Thanks for your submission!";
+          form.reset()
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+            } else {
+              status.innerHTML = "Oops! There was a problem submitting your form"
+            }
+          })
+        }
       }).catch(error => {
         status.innerHTML = "Oops! There was a problem submitting your form"
       });
